@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
@@ -36,6 +37,10 @@ public class StaticImport {
         System.err.println(s);
     }
 
+    public static String lineSeparator() {
+        return System.getProperties().getProperty("line.separator");
+    }
+
     // ----------- Thread ---------
     public static Thread currentThread() {
         return Thread.currentThread();
@@ -58,6 +63,10 @@ public class StaticImport {
     public static <T, U> Comparator<T> comparing(Function<? super T, ? extends U> keyExtractor,
         Comparator<? super U> keyComparator) {
         return Comparator.comparing(keyExtractor, keyComparator);
+    }
+
+    public static <T> Comparator<T> reverseOrder() {
+        return Collections.reverseOrder();
     }
 
     // ---------- Collectors ----------
@@ -135,6 +144,15 @@ public class StaticImport {
     // ---------- Integer ----------
     public static String toBinaryString(int val) {
         return Integer.toBinaryString(val);
+    }
+
+    public static <T> T self(T t) {
+        return t;
+    }
+
+    // ---------- Null ----------
+    public static <T> T requireNonNull(T obj) {
+        return Objects.requireNonNull(obj);
     }
 
 }

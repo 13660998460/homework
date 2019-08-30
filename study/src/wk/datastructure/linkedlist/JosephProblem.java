@@ -1,11 +1,12 @@
-package wk.data_structure.linked_list;
+package wk.datastructure.linkedlist;
 
 import static wk.util.StaticImport.sysout;
 
 /**
  * 约瑟夫问题
  * 
- * 问题概述： n个人排成一圈。从某个人开始，按顺时针方向依次编号。从编号为1的人开始顺时针“一二三”报数， 报到m的人退出圈子，试问最后剩下的人最开始的编号。
+ * 问题概述： n个人排成一圈。从某个人开始，按顺时针方向依次编号。从编号为1的人开始顺时针“一二三”报数，
+ * 报到m的人退出圈子，试问最后剩下的人最开始的编号。
  * 
  * @author wk
  *

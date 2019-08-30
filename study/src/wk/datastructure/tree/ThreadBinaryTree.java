@@ -1,4 +1,4 @@
-package wk.data_structure.tree;
+package wk.datastructure.tree;
 
 /**
  * 线索二叉树
@@ -6,16 +6,15 @@ package wk.data_structure.tree;
  * 定义：将二叉树的空白子节点的指针利用起来指向其特定遍历方式的前驱和后驱。 规律：二叉树中null指针的数量为二叉树节点的数量+1，即叶子节点的数量最多为二叉树节点数量/2+1
  * 
  * @author wk
- * 
  */
-public class ThreadBinaryTree<T> {
-    private Node<T> root;
+public class ThreadBinaryTree {
+    private Node root;
 
-    private Node<T> pre; // 前驱
+    private Node pre; // 前驱
 
-    public static <T> ThreadBinaryTree<T> newInstance(BinaryTree<T> binaryTree) {
-        ThreadBinaryTree<T> tree = new ThreadBinaryTree<>();
-        tree.root = new Node<>(binaryTree.root);
+    public static ThreadBinaryTree newInstance(BinaryTree binaryTree) {
+        ThreadBinaryTree tree = new ThreadBinaryTree();
+        tree.root = new Node(binaryTree.root.element());
         tree.threadNode();
         return tree;
     }
@@ -24,7 +23,7 @@ public class ThreadBinaryTree<T> {
         threadNode(root);
     }
 
-    private void threadNode(Node<T> node) {
+    private void threadNode(Node node) {
         if (node == null) {
             return;
         }
@@ -43,7 +42,7 @@ public class ThreadBinaryTree<T> {
 
     public String travel() {
         StringBuilder sb = new StringBuilder();
-        Node<T> temp = root;
+        Node temp = root;
         while (temp != null) {
             while (temp.leftType == 0) {
                 temp = temp.left;
@@ -58,28 +57,13 @@ public class ThreadBinaryTree<T> {
         return sb.toString();
     }
 
-    private static class Node<T> {
-
-        public Node(BinaryTree.Node<T> node) {
-            this.element = node.element;
-            if (node.left != null) {
-                this.left = new Node<T>(node.left);
-            }
-            if (node.right != null) {
-                this.right = new Node<T>(node.right);
-            }
+    private static class Node extends wk.datastructure.tree.Node<Node> {
+        public Node(int i) {
+            super(i);
         }
 
-        T element;
-        Node<T> left;
-        Node<T> right;
         int leftType;
         int rightType;
-
-        @Override
-        public String toString() {
-            return element.toString();
-        }
     }
 
 }

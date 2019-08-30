@@ -1,5 +1,11 @@
-package wk.data_structure.stack;
+package wk.datastructure.stack;
 
+/**
+ * 栈简易实现，固定大小
+ * 
+ * @author wk
+ * @date 2019/07/25
+ */
 public class Stack<T> {
     private static final int DEFAULT_CAPACITY = 10;
 
@@ -12,10 +18,6 @@ public class Stack<T> {
     }
 
     public Stack(int size) {
-        elements = new Object[size];
-    }
-
-    public Stack(int size, int factor) {
         elements = new Object[size];
     }
 
@@ -33,6 +35,10 @@ public class Stack<T> {
         if (index == 0)
             return null;
         return element(index - 1);
+    }
+
+    public int size() {
+        return index;
     }
 
     @SuppressWarnings("unchecked")

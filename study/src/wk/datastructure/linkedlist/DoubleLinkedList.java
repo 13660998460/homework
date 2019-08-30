@@ -1,4 +1,4 @@
-package wk.data_structure.linked_list;
+package wk.datastructure.linkedlist;
 
 /**
  * 双向链表

@@ -1,7 +1,14 @@
-package wk.data_structure.tree;
+package wk.datastructure.tree;
+
+import static org.junit.Assert.assertTrue;
+import static wk.util.StaticImport.random;
 
 import java.util.Collections;
 import java.util.LinkedList;
+
+import org.junit.jupiter.api.Test;
+
+import wk.datastructure.tree.TreeTraversal.TravelMode;
 
 /**
  * 二叉排序树
@@ -11,13 +18,7 @@ import java.util.LinkedList;
  * @author wk
  */
 public class BinarySortTree {
-    private Node root;
-
-    public static void main(String[] args) {}
-
-    public void test() {
-
-    }
+    protected Node root;
 
     public static Node createBinarySortTree(int[] source) {
         LinkedList<Node> list = new LinkedList<>();
@@ -61,7 +62,7 @@ public class BinarySortTree {
         }
     }
 
-    public void delete(int i) {
+    public Node delete(int i) {
         Node parent = root;
         Node target = null;
         while (parent != null) {
@@ -87,9 +88,10 @@ public class BinarySortTree {
 
         }
         if (target == null) {
-            return;
+            return null;
         }
         delete(parent, target);
+        return target;
     }
 
     public void delete(Node parent, Node target) {
@@ -156,20 +158,38 @@ public class BinarySortTree {
         return result;
     }
 
-    static class Node implements Comparable<Node> {
-        int element;
-        Node left;
-        Node right;
+    static class Node extends wk.datastructure.tree.Node<Node> implements Comparable<Node> {
 
         public Node(int element, Node left, Node right) {
-            this.element = element;
-            this.left = left;
-            this.right = right;
+            super(element, left, right);
         }
 
         @Override
         public int compareTo(Node o) {
             return Integer.compare(this.element, o.element);
         }
+
+    }
+
+    @Test
+    public void test() {
+        BinarySortTree tree = new BinarySortTree();
+        for (int i = 0; i < 100; i++) {
+            tree.add(random().nextInt());
+        }
+        assertTrue(isBinarySortTree(tree.root));
+    }
+
+    public static boolean isBinarySortTree(wk.datastructure.tree.Node<?> root) {
+        if (root == null)
+            return false;
+        int[] elements = TreeTraversal.travel(root, TravelMode.Middle);
+        for (int i = 0; i < elements.length - 2; i++) {
+            if (elements[i] > elements[i + 1]) {
+                return false;
+            }
+            i++;
+        }
+        return true;
     }
 }

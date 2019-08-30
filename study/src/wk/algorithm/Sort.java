@@ -15,12 +15,12 @@ import org.junit.jupiter.api.RepeatedTest;
  * @author wk
  */
 public class Sort {
-    static final int SORT_SIZE = 10000000;
+    static final int SORT_SIZE = 100000;
 
     static int[] source = new int[SORT_SIZE];
 
     @BeforeEach
-    private static void initSource() {
+    private void initSource() {
         Random random = new Random();
         for (int i = 0; i < source.length; i++) {
             source[i] = random.nextInt(SORT_SIZE);
@@ -28,7 +28,7 @@ public class Sort {
     }
 
     @AfterEach
-    private void checkSource() {
+    private void checkSort() {
         for (int i = 0; i < source.length - 2; i++) {
             int j = i + 1;
             assertTrue(source[i] <= source[j]);
@@ -36,13 +36,13 @@ public class Sort {
     }
 
     @RepeatedTest(5)
-    public void streamSort() {
-        source = Arrays.stream(source).parallel().sorted().toArray();
+    public void javaSort() {
+        Arrays.sort(source);
     }
 
     @RepeatedTest(5)
-    public void arraySort() {
-        Arrays.sort(source);
+    public void javaParallelSort() {
+        Arrays.parallelSort(source);
     }
 
     @RepeatedTest(5)
@@ -105,7 +105,8 @@ public class Sort {
     /**
      * 堆排序：属于选择排序
      * 
-     * 因叶子节点的数量最多为二叉树节点数量/2+1，则最后一个非叶子节点的下标为 arr.length/2-1 设完全二叉树任意父节点下标为x，左子节点下标为y，右子节点下标为z，则有y=2x+1,z=2x+2
+     * 因叶子节点的数量最多为二叉树节点数量/2+1，则最后一个非叶子节点的下标为 arr.length/2-1 
+     * 设完全二叉树任意父节点下标为x，左子节点下标为y，右子节点下标为z，则有y=2x+1,z=2x+2
      */
     public static void heapSort(int[] source) {
         // 将所有非叶子节点都调整为一个大顶堆

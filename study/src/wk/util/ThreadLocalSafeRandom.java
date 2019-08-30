@@ -6,6 +6,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+/**
+ * 安全的随机数生成器
+ * 
+ * @author wk
+ */
 public final class ThreadLocalSafeRandom {
 
     private SecureRandom random = new SecureRandom();

@@ -1,6 +1,6 @@
-package wk.data_structure.linked_list;
+package wk.datastructure.linkedlist;
 
-import wk.data_structure.stack.Stack;
+import wk.datastructure.stack.Stack;
 
 /**
  * 单向链表

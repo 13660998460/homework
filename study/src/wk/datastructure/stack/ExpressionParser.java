@@ -1,7 +1,11 @@
-package wk.data_structure.stack;
+package wk.datastructure.stack;
 
+/**
+ * 表达式解析器
+ * @author wk
+ */
 public class ExpressionParser {
-    private String expression;
+    private final String expression;
 
     private int index;
 
@@ -15,9 +19,7 @@ public class ExpressionParser {
             return element;
         }
         String result = element + "";
-        while (true) {
-            if (!hasNext())
-                break;
+        while (hasNext()) {
             char nextElement = expression.charAt(index);
             if (!Character.isDigit(nextElement)) {
                 break;
